@@ -16,7 +16,7 @@ class Calculator {
     clear() {
         this.currentOperand = "";
         this.previousOperand = "";
-        this.operation = undefined;
+        this.operation = null;
     }
 
     delete() {
@@ -41,7 +41,7 @@ class Calculator {
     }
 
     calculate() {
-        let calculation;
+        let calculation = 0;
         const prev = parseFloat(this.previousOperand);
         const current = parseFloat(this.currentOperand);
         if (isNaN(prev) || isNaN(current)) return;
@@ -56,13 +56,14 @@ class Calculator {
                 calculation = prev * current;
                 break;
             case "÷":
+                if (current === 0) { alert("Cannot divide by zero!"); return; }
                 calculation = prev / current;
                 break;
             default:
                 return;
         }
         this.currentOperand = calculation;
-        this.operation = undefined;
+        this.operation = null;
         this.previousOperand = "";
     }
 
